@@ -1,17 +1,34 @@
-+"""A simple calculator supporting four arithmetic operations."""
+
+"""A simple calculator supporting four arithmetic operations."""
 
 
-def add(a, b, operation):
-    """Calculate using addition"""
+def calculate(a, b, operation):
+    """Calculate using addition, subtraction, multiplication, or division."""
+
     if type(a) not in (int, float) or type(b) not in (int, float):
         raise TypeError("Both operands must be numbers.")
 
     if operation == "+":
         return a + b
+
+    elif operation == "-":
+        return a - b
+
+    elif operation == "*":
+        return a * b
+
+    elif operation == "/":
+        if b == 0:
+            raise ZeroDivisionError("Cannot divide by zero.")
+        return a / b
+
     else:
         raise ValueError("Unsupported operation. Use +, -, *, or /.")
 
+
 def main():
+    """Run the calculator."""
+
     print("Python Calculator")
     print("Supported operations: +, -, *, /")
     print("Type 'exit' to quit.")
@@ -28,11 +45,20 @@ def main():
             continue
 
         try:
-            a = float(input("Enter first number: "))
-            b = float(input("Enter second number: "))
-            result = add(a, b, operation)
+            a = float(input("Enter the first number: "))
+            b = float(input("Enter the second number: "))
+
+            result = calculate(a, b, operation)
+
             print("Result:", result)
-        except (ValueError, TypeError, ZeroDivisionError) as error:
+
+        except ValueError:
+            print("Error: Please enter valid numbers.")
+
+        except TypeError as error:
+            print("Error:", error)
+
+        except ZeroDivisionError as error:
             print("Error:", error)
 
 
